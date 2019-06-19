@@ -1,54 +1,76 @@
 #include<iostream>
-#include<string.h>
-using namespace std; 
-class Cell {
-public:
-  Cell(char con[]);
-  ~Cell();//≤ª”√–¥ 
+#include <string>
+#include <sstream>
+using namespace std;
 
-  void show();
-private:
-  char *content;
-};
-class Table:protected Cell {
-public:
-  Table();
-  Table(int a,int b);
-  void show();
-  int addRow();
-  void delRow(int n);
-  int addColumn();
-  void delColumn(int n);
-  void set(int a,int b,char con[]);
-  void set(int a,int b,int c);
-private:
-  Cell cells;
-};
+string a[100][100];
 
-Cell::Cell(char con[]={"\0"}){
-	strcpy(content,con);
-}
-void Cell::show(){
-	cout<<content;
-} 
+class Table{
+	protected:
+		int row;
+		int column;
+	public:
+		Table();
+		Table(int a,int b); 
+		void show();
+		void addRow();
+		void addColumn();
+		void set(int x,int y,int z);
+		void set(int x,int y,string z);
+		void delRow(int i);
+		void delColumn(int i);
+};
+ 
 Table::Table(){
-	cells.Cell();
+	row=1;
+	column=1;
 }
 Table::Table(int a,int b){
+	row=a;
+	column=b;
 }
-void Table::show(){	
-} 
-int Table::addRow(){
+void Table::show(){
+	for(int i=0;i<row;i++){
+		for(int j=0;j<column;j++){
+	    	cout<<a[i][j]<<" ";
+		}
+	cout<<"\n";
+	}
+	cout<<"\n";	
+}
+void Table::addRow(){
+	row=row++;
 }
 void Table::delRow(int n){
+	for(int j=n;j<row-1;j++){
+		string *p=a[j];
+		*a[j]=*a[j+1];
+		*a[j+1]=*p;
+	}
+	row--;
 }
-int Table::addColumn(){
+void Table::addColumn(){
+	column=column++;
 }
 void Table::delColumn(int n){
+	for(int j=n;j<column-1;j++){
+		for(int k=0;k<row-1;k++){
+			string p=a[j][k];
+			a[j][k]=a[j][k+1];
+			a[j][k+1]=p;
+		}
+	}
+	column--;
 }
-void Table::set(int a ,int b,char con[]){
+void Table::set(int x ,int y,string z){
+	a[x][y]=z;
 }
-void Table::set(int a,int b,int c){
+void Table::set(int x,int y,int z){
+	stringstream ss;
+	string u;
+	ss<<z;
+	ss>>u;
+	a[x][y]=u;
 }
 int main() {
   Table tb;
