@@ -1,0 +1,32 @@
+new and delete
+1.new 操作符
+（1）指针变量=new 类型；
+    int *p;
+    p=new int;
+    *p=3;
+（2）指针变量=new 类型(初值)；
+    float *p1;
+    p1=new float(3);
+（3）指针变量=new 类型[数组元素值]
+    float *p2;
+    p2=new float[3];
+    p2[0]=0;
+    p2[1]=1.1;
+    p2[2]=20.9
+（4）二维数组分配堆内存的方法
+    int m=5;
+    int n=4;
+    int **p;
+    p=new int *[m];
+    for(int i=0;i<m;i++){
+        p[i]=new int[n];
+    }
+2.delete 操作符
+（1）delete 指针变量；
+    delete p;
+（2）delete []指针变量；
+    delete []p;
+（3）二维数组的堆内存释放
+    for(i=0;i<m;i++){
+        delete[] p[i];
+    }
